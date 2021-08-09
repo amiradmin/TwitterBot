@@ -20,12 +20,15 @@ class Twitter():
             print(tweet)
 
     def get_user_mentions_timeline(self):
-        mentions = self.api.mentions_timeline()[:-1]
-        for men in mentions:
-            print(men.user.screen_name)
-            for item in men.entities['urls']:
-                print(item['expanded_url'])
+        mentions = self.api.mentions_timeline()[:]
+        # for men in mentions:
+        #     print(men.user.screen_name)
+        #     for item in men.entities['urls']:
+        #         print(item['expanded_url'])
         return mentions
+    def get_tweet_by_id(self,tweetID):
+        tweet = self.api.get_status(id=tweetID,tweet_mode='extended')
+        return tweet
 
     def get_targt_user_timeline(self):
         tweets = self.api.user_timeline(screen_name=self.userID,
