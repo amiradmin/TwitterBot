@@ -14,6 +14,11 @@ class Twitter():
             print(follower.screen_name)
             # return follower.screen_name
 
+
+    def get_following(self,id):
+        user = self.api.get_user(id)
+        return user.friends_count
+
     def get_user_home_timeline(self):
         public_tweets = self.api.home_timeline()[:1]
         for tweet in public_tweets:

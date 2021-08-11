@@ -30,10 +30,11 @@ class MentionList(APIView):
             # menObj.tweet = tweet.text
             # menObj.tweetID = tweet.id_str
 
-            if  Mention.objects.filter(tweetID = mem.in_reply_to_status_id).first():
+            if not Mention.objects.filter(tweetID = mem.in_reply_to_status_id).first():
                 tweet = twObj.get_tweet_by_id(mem.in_reply_to_status_id_str)
                 menObj.tweetID = mem.in_reply_to_status_id
                 menObj.accountName = mem.in_reply_to_screen_name
+
                 # menObj.tweetDate = tweet.created_at
                 menObj.tweet = tweet.full_text
                 # menObj.imageUrl = tweet.user.profile_image_url
@@ -42,7 +43,8 @@ class MentionList(APIView):
                 menObj.description =  tweet.user.description
                 menObj.avatarUrl =  tweet.user.profile_image_url_https
 
-                # print(tweet.user)
+                menObj.following = twObj.get_following(tweet.user.id)
+                print(tweet.user.id)
                 print('========================')
                 print()
                 # print(tweet)
