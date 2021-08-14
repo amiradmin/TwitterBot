@@ -29,37 +29,45 @@ class MentionList(APIView):
 
             # menObj.tweet = tweet.text
             # menObj.tweetID = tweet.id_str
+            reply = twObj.get_tweet_by_id(mem.id)
+            print(reply.full_text)
 
-            if not Mention.objects.filter(tweetID = mem.in_reply_to_status_id).first():
-                tweet = twObj.get_tweet_by_id(mem.in_reply_to_status_id_str)
-                menObj.tweetID = mem.in_reply_to_status_id
-                menObj.accountName = mem.in_reply_to_screen_name
+            user_email = "abc@gmail.com"
 
-                # menObj.tweetDate = tweet.created_at
-                menObj.tweet = tweet.full_text
-                # menObj.imageUrl = tweet.user.profile_image_url
-                menObj.followers =int(tweet.user.followers_count)
-                menObj.name = tweet.user.name
-                menObj.description =  tweet.user.description
-                menObj.avatarUrl =  tweet.user.profile_image_url_https
+            keywords = ["save", "Save", "SAVE"]
+            result = any(keyword in reply.full_text for keyword in keywords)
+            if result:
+                print(result)
+                if not  Mention.objects.filter(tweetID = mem.in_reply_to_status_id).first():
+                    tweet = twObj.get_tweet_by_id(mem.in_reply_to_status_id_str)
+                    menObj.tweetID = mem.in_reply_to_status_id
+                    menObj.accountName = mem.in_reply_to_screen_name
+                    print(mem.id)
+                    # menObj.tweetDate = tweet.created_at
+                    menObj.tweet = tweet.full_text
+                    # menObj.imageUrl = tweet.user.profile_image_url
+                    menObj.followers =int(tweet.user.followers_count)
+                    menObj.name = tweet.user.name
+                    menObj.description =  tweet.user.description
+                    menObj.avatarUrl =  tweet.user.profile_image_url_https
 
-                menObj.following = twObj.get_following(tweet.user.id)
-                print(tweet.user.id)
-                print('========================')
-                print()
-                # print(tweet)
-                if 'media' in tweet.entities:
-                    for image in tweet.entities['media']:
-                        print(image['media_url'])
-                        menObj.imageUrl= image['media_url']
+                    menObj.following = twObj.get_following(tweet.user.id)
+                    print(tweet.user.id)
+                    print('========================')
+                    print()
+                    # print(tweet)
+                    if 'media' in tweet.entities:
+                        for image in tweet.entities['media']:
+                            print(image['media_url'])
+                            menObj.imageUrl= image['media_url']
 
-                for item in tweet.entities['urls']:
-                    menObj.url = item['expanded_url']
-                    # print(item['followers_count'])
-                    # menObj.url = item['url']
-                    # print( item['profile_image_url'])
+                    for item in tweet.entities['urls']:
+                        menObj.url = item['expanded_url']
+                        # print(item['followers_count'])
+                        # menObj.url = item['url']
+                        # print( item['profile_image_url'])
 
-                menObj.save()
+                    menObj.save()
             # print(tweet)
 
 

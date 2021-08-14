@@ -25,7 +25,8 @@ class Twitter():
             print(tweet)
 
     def get_user_mentions_timeline(self):
-        mentions = self.api.mentions_timeline()[:]
+        mentions = self.api.mentions_timeline(tweet_mode="extended")[:]
+
         # for men in mentions:
         #     print(men.user.screen_name)
         #     for item in men.entities['urls']:
