@@ -1,11 +1,15 @@
 import tweepy
 
+
 class Twitter():
     """This class manipulate Tittwer API """
-    userID = None   #Target Twitter user id
+    userID = None  # Target Twitter user id
+
     def __init__(self):
-        self.auth = tweepy.OAuthHandler('YONn12EyeOHGILv3VwzuN4PWJ', '3BhrxDja35CY8nLHKSM5oNkob1EK0HfeYTIvFJr9OtUm4HVHHG')
-        self.auth.set_access_token('1426439628857516035-dBswkTY1a9Xvgo9HetiepwDb4kP9Wj', '6JcJyrxb7P0dKvfh7SkijjJjIxGsf7Scn43VQJgnMAZLy')
+        self.auth = tweepy.OAuthHandler('YONn12EyeOHGILv3VwzuN4PWJ',
+                                        '3BhrxDja35CY8nLHKSM5oNkob1EK0HfeYTIvFJr9OtUm4HVHHG')
+        self.auth.set_access_token('1426439628857516035-dBswkTY1a9Xvgo9HetiepwDb4kP9Wj',
+                                   '6JcJyrxb7P0dKvfh7SkijjJjIxGsf7Scn43VQJgnMAZLy')
         self.api = tweepy.API(self.auth, wait_on_rate_limit=True)
         self.userID = 'UrlTestBot'
 
@@ -14,8 +18,7 @@ class Twitter():
             print(follower.screen_name)
             # return follower.screen_name
 
-
-    def get_following(self,id):
+    def get_following(self, id):
         user = self.api.get_user(id)
         return user.friends_count
 
@@ -32,19 +35,20 @@ class Twitter():
         #     for item in men.entities['urls']:
         #         print(item['expanded_url'])
         return mentions
-    def get_tweet_by_id(self,tweetID):
-        tweet = self.api.get_status(id=tweetID,tweet_mode='extended')
+
+    def get_tweet_by_id(self, tweetID):
+        tweet = self.api.get_status(id=tweetID, tweet_mode='extended')
         return tweet
 
     def get_targt_user_timeline(self):
         tweets = self.api.user_timeline(screen_name=self.userID,
-                                   # 200 is the maximum allowed count
-                                   count=200,
-                                   include_rts=False,
-                                   # Necessary to keep full_text
-                                   # otherwise only the first 140 words are extracted
-                                   tweet_mode='extended'
-                                   )
+                                        # 200 is the maximum allowed count
+                                        count=200,
+                                        include_rts=False,
+                                        # Necessary to keep full_text
+                                        # otherwise only the first 140 words are extracted
+                                        tweet_mode='extended'
+                                        )
         for info in tweets[:3]:
             print("ID: {}".format(info.id))
             print(info.created_at)
@@ -52,7 +56,7 @@ class Twitter():
             print("\n")
         return tweets
 
-    def search(self,search_words, date_since):
+    def search(self, search_words, date_since):
         # Collect tweets
         tweets = tweepy.Cursor(self.api.search,
                                screen_name=self.userID,
