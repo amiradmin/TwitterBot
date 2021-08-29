@@ -3,17 +3,17 @@
 This app check an account id mentions and will insert the tweet details in case of "save" keyword has written in the reply message.
 
 ## Installation
-###Dillinger requires Django3 to run.
-####Install packages with pip from requirements.txt file
+### Dillinger requires Django3 to run.
+#### Install packages with pip from requirements.txt file
 `pip install -r requirements.txt`
 
-###Migrate 
+### Migrate 
 `Python3 manage.py migrate` 
 
 Create an user to login to Django admin panel
 `Python3 manage.py createsuperuser`
 
-###Run Django development server
+### Run Django development server
 `Python3 manage.py runserver`
 
 
