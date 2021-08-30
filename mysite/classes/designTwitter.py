@@ -6,10 +6,10 @@ class Twitter():
     userID = None  # Target Twitter user id
 
     def __init__(self):
-        self.auth = tweepy.OAuthHandler('YONn12EyeOHGILv3VwzuN4PWJ',
-                                        '3BhrxDja35CY8nLHKSM5oNkob1EK0HfeYTIvFJr9OtUm4HVHHG')
-        self.auth.set_access_token('1426439628857516035-dBswkTY1a9Xvgo9HetiepwDb4kP9Wj',
-                                   '6JcJyrxb7P0dKvfh7SkijjJjIxGsf7Scn43VQJgnMAZLy')
+        self.auth = tweepy.OAuthHandler('',
+                                        '')
+        self.auth.set_access_token('',
+                                   '')
         self.api = tweepy.API(self.auth, wait_on_rate_limit=True)
         self.userID = 'UrlTestBot'
 
